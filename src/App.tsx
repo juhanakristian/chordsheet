@@ -1,12 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import Sheet from "./components/Sheet";
 import Search from "./components/Search";
 import Chord from "./components/Chord";
 
+import { ipcRenderer } from "electron";
+
 function App() {
-  const chords = new Array(100).fill(0).map((e, index) => {
-    return <Chord key={index} identifier={`${index}`} />;
+  const [chords, setChords] = useState([]);
+
+  useEffect(() => {
+    const result = ipcRenderer.sendSync("read-config");
+    setChords(result);
+  }, []);
+
+  const chordsComponents = chords.map((chord, index) => {
+    const chordId = `${index}-${chord.notes.join("")}`;
+    return <Chord key={chordId} notes={chord.notes} name={chord.name} />;
   });
 
   return (
@@ -18,7 +28,7 @@ function App() {
           </div>
 
           <div className="grid grid-flow-row grid-cols-6 gap-4 p-5 ">
-            {chords}
+            {chordsComponents}
           </div>
         </div>
         <div className="flex-grow-0 w-4/12 p-10 bg-blue-900">

@@ -2,25 +2,29 @@ import React, { useEffect } from "react";
 
 import { draw } from "vexchords";
 
+type Note = string | number;
+
 interface ChordProps {
-  identifier: string;
+  notes: Note[];
+  name: string;
 }
 
 function Chord(props: ChordProps) {
-  const elementId = `chord-${props.identifier}`;
+  const elementId = `c${props.notes.join("")}`;
+  const chordNotes = props.notes.map((note, index) => [index + 1, note]);
+
   useEffect(() => {
     draw(`#${elementId}`, {
-      chord: [
-        [1, 2],
-        [2, 1],
-        [3, 2],
-        [4, 0],
-        [5, "x"],
-        [6, "x"],
-      ],
+      chord: chordNotes,
     });
   });
-  return <div id={elementId}></div>;
+
+  return (
+    <div>
+      <div className="">{props.name}</div>
+      <div id={elementId}></div>
+    </div>
+  );
 }
 
 export default Chord;
