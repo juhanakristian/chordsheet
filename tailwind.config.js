@@ -6,6 +6,6 @@ module.exports = {
     },
     extend: {},
   },
-  variants: {},
+  variants: { bgColor: ["group-hover"] },
   plugins: [require("tailwindcss-aspect-ratio")],
 };

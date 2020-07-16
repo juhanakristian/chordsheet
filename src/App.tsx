@@ -23,7 +23,7 @@ function App() {
     <div className="flex flex-col w-full h-screen max-h-screen overflow-hidden">
       <div className="flex flex-row w-full h-full">
         <div className="w-8/12 overflow-auto">
-          <div className="pt-5 pl-10 pr-10">
+          <div className="pt-5 pl-5 pr-10">
             <Search value="" onChange={(value: string) => {}} />
           </div>
 
