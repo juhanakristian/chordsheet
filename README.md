@@ -2,7 +2,7 @@
 
 Chord Sheet is a Electron app for creating printable guitar chord sheets. I started it because I wanted to print guitar chords with fingerings so practicing songs would be easier.
 
-[!Screenshot of Chord sheet](screenshots/screenshot01.png?raw=true "Screenshot")
+![Screenshot of Chord sheet](screenshots/screenshot01.png?raw=true "Screenshot")
 
 ## Tasks
 - [x] Render chords using vexchords
