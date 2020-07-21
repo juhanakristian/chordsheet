@@ -17882,6 +17882,10 @@ video {
   padding-bottom: 141.42857142857144%;
 }
 
+.aspect-ratio-square {
+  padding-bottom: 100%;
+}
+
 @media (min-width: 640px) {
   .sm\:space-y-0 > :not(template) ~ :not(template) {
     --space-y-reverse: 0;
@@ -35144,6 +35148,10 @@ video {
 
   .sm\:aspect-ratio-a4 {
     padding-bottom: 141.42857142857144%;
+  }
+
+  .sm\:aspect-ratio-square {
+    padding-bottom: 100%;
   }
 }
 
@@ -52410,6 +52418,10 @@ video {
   .md\:aspect-ratio-a4 {
     padding-bottom: 141.42857142857144%;
   }
+
+  .md\:aspect-ratio-square {
+    padding-bottom: 100%;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -69675,6 +69687,10 @@ video {
   .lg\:aspect-ratio-a4 {
     padding-bottom: 141.42857142857144%;
   }
+
+  .lg\:aspect-ratio-square {
+    padding-bottom: 100%;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -86939,5 +86955,9 @@ video {
 
   .xl\:aspect-ratio-a4 {
     padding-bottom: 141.42857142857144%;
+  }
+
+  .xl\:aspect-ratio-square {
+    padding-bottom: 100%;
   }
 }

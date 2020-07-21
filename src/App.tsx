@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 
 import Sheet from "./components/Sheet";
 import Search from "./components/Search";
-import Chord from "./components/Chord";
+import Chord, { ChordData } from "./components/Chord";
 
 import { ipcRenderer } from "electron";
 
 function App() {
   const [chords, setChords] = useState([]);
+  const [selected, setSelected] = useState([]);
+
+  function handleAddClicked(data: ChordData) {
+  }
 
   useEffect(() => {
     const result = ipcRenderer.sendSync("read-config");
@@ -16,7 +20,16 @@ function App() {
 
   const chordsComponents = chords.map((chord, index) => {
     const chordId = `${index}-${chord.notes.join("")}`;
-    return <Chord key={chordId} notes={chord.notes} name={chord.name} />;
+    const data = {
+      notes: chord.notes,
+      name: chord.name,
+    };
+
+    return <Chord
+      key={chordId}
+      data={data}
+      onAdd={(data) => handleAddClicked(data)}
+    />;
   });
 
   return (

@@ -1,24 +1,34 @@
-import React, { useEffect, useLayoutEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { draw } from "vexchords";
 
 import { useWindowSize } from "../hooks/size";
+import AddIcon from "../icons/AddIcon";
+import IconButton from "./IconButton";
 
 type Note = string | number;
 
-interface ChordProps {
+export interface ChordData {
   notes: Note[];
   name: string;
 }
 
+interface ChordProps {
+  data: ChordData;
+  onAdd: (data: ChordData) => void;
+}
+
 function Chord(props: ChordProps) {
   const container = useRef(null);
+  const [hover, setHover] = useState(false);
   const { width, height } = useWindowSize();
-  const elementId = `c${props.notes.join("")}`;
-  const chordNotes = props.notes.map((note, index) => [index + 1, note]);
 
-  useLayoutEffect(() => {
+  const elementId = `c${props.data.notes.join("")}`;
+  const chordNotes = props.data.notes.map((note, index) => [index + 1, note]);
+
+  useEffect(() => {
     const selector = `#${elementId}`;
+    // Clear the container
     document.querySelector(selector).innerHTML = "";
 
     draw(selector, {
@@ -31,9 +41,18 @@ function Chord(props: ChordProps) {
   return (
     <div
       className="flex flex-col overflow-hidden border-2 border-solid rounded-lg group hover:border-blue-400"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
-      <div className="text-center bg-gray-200 group-hover:bg-blue-400">
-        {props.name}
+      <div
+        className="flex flex-row pl-2 pr-2 bg-gray-200 group-hover:bg-blue-400"
+      >
+        <div className="flex-grow">
+          {props.data.name}
+        </div>
+        <IconButton onClick={() => props.onAdd(props.data)}>
+          <AddIcon size={12} color="#63b3ed" />
+        </IconButton>
       </div>
       <div className="max-w-sm" ref={container} id={elementId}></div>
     </div>
