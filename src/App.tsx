@@ -11,6 +11,11 @@ function App() {
   const [selected, setSelected] = useState([]);
 
   function handleAddClicked(data: ChordData) {
+    const isSelected = selected.find((c: ChordData) => c.name === data.name);
+    if (isSelected) return;
+
+    setSelected([...selected, data]);
+    console.log(selected);
   }
 
   useEffect(() => {
@@ -45,7 +50,7 @@ function App() {
           </div>
         </div>
         <div className="flex-grow-0 w-4/12 p-10 bg-blue-900">
-          <Sheet />
+          <Sheet chords={selected} />
         </div>
       </div>
     </div>
