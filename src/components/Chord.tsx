@@ -6,15 +6,16 @@ import { useWindowSize } from "../hooks/size";
 import AddIcon from "../icons/AddIcon";
 import IconButton from "./IconButton";
 
-type Note = string | number;
+type ChordNote = [number, number];
 
 export interface ChordData {
-  notes: Note[];
+  chord: ChordNote[];
   name: string;
 }
 
 interface ChordProps {
   data: ChordData;
+  identifier: string;
   onAdd: (data: ChordData) => void;
 }
 
@@ -23,16 +24,13 @@ function Chord(props: ChordProps) {
   const [hover, setHover] = useState(false);
   const { width, height } = useWindowSize();
 
-  const elementId = `c${props.data.notes.join("")}`;
-  const chordNotes = props.data.notes.map((note, index) => [index + 1, note]);
-
   useEffect(() => {
-    const selector = `#${elementId}`;
+    const selector = `#${props.identifier}`;
     // Clear the container
     document.querySelector(selector).innerHTML = "";
 
     draw(selector, {
-      chord: chordNotes,
+      chord: props.data.chord,
     }, {
       width: container.current.offsetWidth,
     });
@@ -54,7 +52,7 @@ function Chord(props: ChordProps) {
           <AddIcon size={12} color="#63b3ed" />
         </IconButton>
       </div>
-      <div className="max-w-sm" ref={container} id={elementId}></div>
+      <div className="max-w-sm" ref={container} id={props.identifier}></div>
     </div>
   );
 }

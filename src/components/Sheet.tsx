@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { ChordData } from "./Chord";
 
 import { draw } from "vexchords";
+import { getChordIdentifier } from "../App";
 
 interface SheetProps {
   chords: ChordData[];
@@ -9,19 +10,18 @@ interface SheetProps {
 
 function Sheet(props: SheetProps) {
   useEffect(() => {
-    console.log("useEffect");
     for (const c of props.chords) {
-      console.log(c);
-      const selector = `#${c.name}_${c.notes.join("")}`;
+      const id = getChordIdentifier(c);
+      const selector = `#sheet_${id}`;
       draw(selector, {
-        chord: c.notes,
+        chord: c.chord,
       });
     }
   }, [props.chords]);
 
   const chords = props.chords.map((c: ChordData) => {
-    const identifier = `${c.name}_${c.notes.join("")}`;
-    return <div key={identifier} id={identifier}></div>;
+    const id = getChordIdentifier(c);
+    return <div key={id} id={`sheet_${id}`}></div>;
   });
 
   return (

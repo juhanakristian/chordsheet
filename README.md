@@ -7,7 +7,8 @@ Chord Sheet is a Electron app for creating printable guitar chord sheets. I star
 ## Tasks
 - [x] Render chords using vexchords
 - [x] Read chords from local file
-- [ ] Select chords for printing
+- [x] Select chords for printing
+- [ ] Use vexchord parameter format for chords.json
 - [ ] Layout selected chords for A4 paper
 - [ ] Print chord sheet
 - [ ] Support barre chords

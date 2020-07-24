@@ -6,6 +6,11 @@ import Chord, { ChordData } from "./components/Chord";
 
 import { ipcRenderer } from "electron";
 
+export function getChordIdentifier(data: ChordData) {
+  const t = data.chord.join("").replace(/,/g, "");
+  return `${data.name}-${t}`;
+}
+
 function App() {
   const [chords, setChords] = useState([]);
   const [selected, setSelected] = useState([]);
@@ -23,15 +28,12 @@ function App() {
     setChords(result);
   }, []);
 
-  const chordsComponents = chords.map((chord, index) => {
-    const chordId = `${index}-${chord.notes.join("")}`;
-    const data = {
-      notes: chord.notes,
-      name: chord.name,
-    };
+  const chordsComponents = chords.map((data, index) => {
+    const id = getChordIdentifier(data);
 
     return <Chord
-      key={chordId}
+      key={id}
+      identifier={id}
       data={data}
       onAdd={(data) => handleAddClicked(data)}
     />;
