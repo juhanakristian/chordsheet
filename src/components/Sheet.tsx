@@ -26,7 +26,9 @@ function Sheet(props: SheetProps) {
 
   return (
     <div className="bg-white border border-solid shadow-xl aspect-ratio-a4">
-      {chords}
+      <div className="absolute">
+        {chords}
+      </div>
     </div>
   );
 }
