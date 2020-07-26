@@ -52,7 +52,7 @@ function Chord(props: ChordProps) {
           <AddIcon size={12} color="#63b3ed" />
         </IconButton>
       </div>
-      <div className="max-w-sm" ref={container} id={props.identifier}></div>
+      <div ref={container} id={props.identifier}></div>
     </div>
   );
 }

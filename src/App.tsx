@@ -42,16 +42,18 @@ function App() {
   return (
     <div className="flex flex-col w-full h-screen max-h-screen overflow-hidden">
       <div className="flex flex-row w-full h-full">
-        <div className="w-8/12 overflow-auto">
+        <div className="w-full overflow-auto">
           <div className="pt-5 pl-5 pr-10">
             <Search value="" onChange={(value: string) => {}} />
           </div>
 
-          <div className="grid grid-flow-row grid-cols-6 gap-4 p-5 ">
-            {chordsComponents}
+          <div className="grid grid-flow-row grid-cols-8 gap-4 p-5 ">
+            <div className="col-span-6">
+              {chordsComponents}
+            </div>
           </div>
         </div>
-        <div className="flex-grow-0 w-4/12 p-10 bg-blue-900">
+        <div className="flex-grow-0 hidden w-4/12 p-10 bg-blue-900">
           <Sheet chords={selected} />
         </div>
       </div>
