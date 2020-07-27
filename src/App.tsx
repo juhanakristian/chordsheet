@@ -31,12 +31,14 @@ function App() {
   const chordsComponents = chords.map((data, index) => {
     const id = getChordIdentifier(data);
 
-    return <Chord
-      key={id}
-      identifier={id}
-      data={data}
-      onAdd={(data) => handleAddClicked(data)}
-    />;
+    return (<div className="col-span-4 sm:col-span-2 lg:col-span-1">
+      <Chord
+        key={id}
+        identifier={id}
+        data={data}
+        onAdd={(data) => handleAddClicked(data)}
+      />
+    </div>);
   });
 
   return (
@@ -48,9 +50,7 @@ function App() {
           </div>
 
           <div className="grid grid-flow-row grid-cols-8 gap-4 p-5 ">
-            <div className="col-span-6">
-              {chordsComponents}
-            </div>
+            {chordsComponents}
           </div>
         </div>
         <div className="flex-grow-0 hidden w-4/12 p-10 bg-blue-900">

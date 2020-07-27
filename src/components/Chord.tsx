@@ -52,7 +52,15 @@ function Chord(props: ChordProps) {
           <AddIcon size={12} color="#63b3ed" />
         </IconButton>
       </div>
-      <div ref={container} id={props.identifier}></div>
+      <div>
+        <div
+          className="m-auto"
+          style={{ maxWidth: 110 }}
+          ref={container}
+          id={props.identifier}
+        >
+        </div>
+      </div>
     </div>
   );
 }

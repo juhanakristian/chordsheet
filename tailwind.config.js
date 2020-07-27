@@ -5,7 +5,11 @@ module.exports = {
       a4: [210, 297],
       square: [1, 1],
     },
-    extend: {},
+    extend: {
+      // gridColumn: {
+      //   "span-xs": ""
+      // }
+    },
   },
   variants: { bgColor: ["group-hover"] },
   plugins: [require("tailwindcss-aspect-ratio")],
