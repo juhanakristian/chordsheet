@@ -5,6 +5,9 @@ import Search from "./components/Search";
 import Chord, { ChordData } from "./components/Chord";
 import Sidebar from "./components/Sidebar";
 
+import IconButton from "./components/IconButton";
+import PrintIcon from "./icons/PrintIcon";
+
 import { ipcRenderer } from "electron";
 
 export function getChordIdentifier(data: ChordData) {
@@ -50,12 +53,9 @@ function App() {
           <div className="flex pt-5 pl-5 pr-10">
             <Search value="" onChange={(value: string) => {}} />
             <div className="flex-grow"></div>
-            <button
-              className=""
-              onClick={() => setSidebarOpen(!isSidebarOpen)}
-            >
-              {"<<"}
-            </button>
+            <IconButton onClick={() => setSidebarOpen(!isSidebarOpen)}>
+              <PrintIcon size={24} />
+            </IconButton>
           </div>
 
           <div className="grid grid-flow-row grid-cols-8 gap-4 p-5 ">

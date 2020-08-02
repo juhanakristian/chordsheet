@@ -1,5 +1,8 @@
 import React, { ReactChild, ReactChildren } from "react";
 
+import CloseIcon from "../icons/CloseIcon";
+import IconButton from "./IconButton";
+
 interface SidebarProps {
   open: boolean;
   onClose: () => void;
@@ -25,8 +28,12 @@ export default function Sidebar(props: SidebarProps) {
           right: props.open ? 0 : -300,
         }}
       >
+        <div className="p-2">
+          <IconButton onClick={() => props.onClose()}>
+            <CloseIcon color="white" size={24} />
+          </IconButton>
+        </div>
         <div className="p-10">
-          <button onClick={() => props.onClose()}>X</button>
           {props.children}
         </div>
       </div>

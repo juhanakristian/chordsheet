@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
-import { ChordData } from "./Chord";
 
 import { draw } from "vexchords";
+
+import { ChordData } from "./Chord";
+
 import { getChordIdentifier } from "../App";
 
 interface SheetProps {
