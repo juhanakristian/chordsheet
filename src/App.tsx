@@ -4,6 +4,7 @@ import Sheet from "./components/Sheet";
 import Search from "./components/Search";
 import Chord, { ChordData } from "./components/Chord";
 import Sidebar from "./components/Sidebar";
+import Button from "./components/Button";
 
 import IconButton from "./components/IconButton";
 import PrintIcon from "./icons/PrintIcon";
@@ -64,6 +65,13 @@ function App() {
         </div>
         <Sidebar open={isSidebarOpen} onClose={() => setSidebarOpen(false)}>
           <Sheet chords={selected} />
+          <Button onClick={() => {}}>Clear</Button>
+          <Button
+            onClick={() => {}}
+            icon={<PrintIcon size={16} color="#fff" />}
+          >
+            Print
+          </Button>
         </Sidebar>
       </div>
     </div>

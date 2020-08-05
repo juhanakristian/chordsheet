@@ -33,6 +33,7 @@ function Chord(props: ChordProps) {
       chord: props.data.chord,
     }, {
       width: container.current.offsetWidth,
+      height: container.current.offsetWidth * (70 / 50),
     });
   }, [container, width]);
 
@@ -45,12 +46,14 @@ function Chord(props: ChordProps) {
       <div
         className="flex flex-row pl-2 pr-2 bg-gray-200 group-hover:bg-blue-400"
       >
-        <div className="flex-grow">
+        <div className="flex-grow group-hover:text-white">
           {props.data.name}
         </div>
-        <IconButton onClick={() => props.onAdd(props.data)}>
-          <AddIcon size={12} color="#63b3ed" />
-        </IconButton>
+        {hover && (
+          <IconButton onClick={() => props.onAdd(props.data)}>
+            <AddIcon size={12} color="#ffffff" />
+          </IconButton>
+        )}
       </div>
       <div>
         <div

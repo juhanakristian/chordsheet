@@ -1,7 +1,7 @@
 import React, { ReactChild, ReactChildren } from "react";
 
 interface SvgIconProps {
-  size: number;
+  size?: number;
   color?: string;
   children?: ReactChild | ReactChildren;
 }
@@ -13,8 +13,8 @@ export default function SvgIcon(props: SvgIconProps) {
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={props.size}
-      height={props.size}
+      width={props.size || 12}
+      height={props.size || 12}
       viewBox="0 0 24 24"
       fill={color}
     >

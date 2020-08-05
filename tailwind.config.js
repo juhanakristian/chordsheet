@@ -11,6 +11,9 @@ module.exports = {
       // }
     },
   },
-  variants: { bgColor: ["group-hover"] },
+  variants: {
+    backgroundColor: ["group-hover", "active"],
+    textColor: ["group-hover"],
+  },
   plugins: [require("tailwindcss-aspect-ratio")],
 };

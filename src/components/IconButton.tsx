@@ -16,7 +16,6 @@ export default function IconButton(props: IconButtonProps) {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    console.log(buttonRef.current);
     setOffset(buttonRef.current.width);
   }, [buttonRef]);
 
