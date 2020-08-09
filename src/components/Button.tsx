@@ -1,7 +1,6 @@
 import React, {
   ReactNode,
 } from "react";
-import IconButton from "./IconButton";
 
 interface ButtonProps {
   children: ReactNode;

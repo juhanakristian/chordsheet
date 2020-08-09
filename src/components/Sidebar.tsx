@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactChild, ReactChildren } from "react";
+import React, { ReactNode } from "react";
 
 import CloseIcon from "../icons/CloseIcon";
 import IconButton from "./IconButton";
@@ -17,8 +17,7 @@ export default function Sidebar(props: SidebarProps) {
           className="absolute w-full h-full "
           style={{ left: 0, top: 0 }}
           onClick={() => props.onClose()}
-        >
-        </div>
+        ></div>
       )}
       <div
         className="absolute h-full m-0 duration-200 bg-blue-900 transition-right"
@@ -33,9 +32,7 @@ export default function Sidebar(props: SidebarProps) {
             <CloseIcon color="white" size={24} />
           </IconButton>
         </div>
-        <div className="p-10">
-          {props.children}
-        </div>
+        <div className="p-10">{props.children}</div>
       </div>
     </div>
   );

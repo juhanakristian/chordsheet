@@ -29,22 +29,31 @@ function App() {
     console.log(selected);
   }
 
+  function handlePrint() {
+    console.log('"Print" clicked');
+  }
+
+  function handleClear() {
+    console.log('"Clear" clicked');
+  }
+
   useEffect(() => {
     const result = ipcRenderer.sendSync("read-config");
     setChords(result);
   }, []);
 
-  const chordsComponents = chords.map((data, index) => {
+  const chordsComponents = chords.map((data) => {
     const id = getChordIdentifier(data);
 
-    return (<div className="col-span-4 sm:col-span-2 lg:col-span-1">
-      <Chord
-        key={id}
-        identifier={id}
-        data={data}
-        onAdd={(data) => handleAddClicked(data)}
-      />
-    </div>);
+    return (
+      <div key={id} className="col-span-4 sm:col-span-2 lg:col-span-1">
+        <Chord
+          identifier={id}
+          data={data}
+          onAdd={(data) => handleAddClicked(data)}
+        />
+      </div>
+    );
   });
 
   return (
@@ -52,7 +61,12 @@ function App() {
       <div className="flex flex-row w-full h-full">
         <div className="w-full overflow-auto overflow-x-hidden">
           <div className="flex pt-5 pl-5 pr-10">
-            <Search value="" onChange={(value: string) => {}} />
+            <Search
+              value=""
+              onChange={(value: string) => {
+                console.log(value);
+              }}
+            />
             <div className="flex-grow"></div>
             <IconButton onClick={() => setSidebarOpen(!isSidebarOpen)}>
               <PrintIcon size={24} />
@@ -65,9 +79,17 @@ function App() {
         </div>
         <Sidebar open={isSidebarOpen} onClose={() => setSidebarOpen(false)}>
           <Sheet chords={selected} />
-          <Button onClick={() => {}}>Clear</Button>
           <Button
-            onClick={() => {}}
+            onClick={() => {
+              handleClear();
+            }}
+          >
+            Clear
+          </Button>
+          <Button
+            onClick={() => {
+              handlePrint();
+            }}
             icon={<PrintIcon size={16} color="#fff" />}
           >
             Print

@@ -1,24 +1,11 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  ReactChild,
-  ReactChildren,
-} from "react";
+import React, { ReactNode } from "react";
 
 interface IconButtonProps {
-  children: ReactChild | ReactChildren;
+  children: ReactNode;
   onClick: () => void;
 }
 
 export default function IconButton(props: IconButtonProps) {
-  const buttonRef = useRef(null);
-  const [offset, setOffset] = useState(0);
-
-  useEffect(() => {
-    setOffset(buttonRef.current.width);
-  }, [buttonRef]);
-
   function handleClick() {
     props.onClick();
   }
@@ -26,7 +13,6 @@ export default function IconButton(props: IconButtonProps) {
   return (
     <div>
       <button
-        ref={buttonRef}
         className="flex items-center justify-center w-6 h-6 rounded-full focus:outline-none"
         onClick={handleClick}
       >

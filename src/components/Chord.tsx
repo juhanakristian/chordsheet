@@ -22,19 +22,23 @@ interface ChordProps {
 function Chord(props: ChordProps) {
   const container = useRef(null);
   const [hover, setHover] = useState(false);
-  const { width, height } = useWindowSize();
+  const { width } = useWindowSize();
 
   useEffect(() => {
     const selector = `#${props.identifier}`;
     // Clear the container
     document.querySelector(selector).innerHTML = "";
 
-    draw(selector, {
-      chord: props.data.chord,
-    }, {
-      width: container.current.offsetWidth,
-      height: container.current.offsetWidth * (70 / 50),
-    });
+    draw(
+      selector,
+      {
+        chord: props.data.chord,
+      },
+      {
+        width: container.current.offsetWidth,
+        height: container.current.offsetWidth * (70 / 50),
+      }
+    );
   }, [container, width]);
 
   return (
@@ -43,9 +47,7 @@ function Chord(props: ChordProps) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div
-        className="flex flex-row pl-2 pr-2 bg-gray-200 group-hover:bg-blue-400"
-      >
+      <div className="flex flex-row pl-2 pr-2 bg-gray-200 group-hover:bg-blue-400">
         <div className="flex-grow group-hover:text-white">
           {props.data.name}
         </div>
@@ -61,8 +63,7 @@ function Chord(props: ChordProps) {
           style={{ maxWidth: 110 }}
           ref={container}
           id={props.identifier}
-        >
-        </div>
+        ></div>
       </div>
     </div>
   );
