@@ -15,26 +15,32 @@ function Sheet(props: SheetProps) {
     for (const c of props.chords) {
       const id = getChordIdentifier(c);
       const selector = `#sheet_${id}`;
-      draw(selector, {
-        chord: c.chord,
-      }, {
-        width: 50,
-        height: 70,
-      });
+      // Clear the container
+      document.querySelector(selector).innerHTML = "";
+
+      draw(
+        selector,
+        {
+          chord: c.chord,
+        },
+        {
+          width: 50,
+          height: 70,
+        }
+      );
     }
   }, [props.chords]);
 
   const chords = props.chords.map((c: ChordData) => {
     const id = getChordIdentifier(c);
-    return <div style={{ width: 50, height: 70 }} key={id} id={`sheet_${id}`}>
-    </div>;
+    return (
+      <div style={{ width: 50, height: 70 }} key={id} id={`sheet_${id}`}></div>
+    );
   });
 
   return (
     <div className="bg-white border border-solid shadow-xl aspect-ratio-a4">
-      <div className="absolute flex">
-        {chords}
-      </div>
+      <div className="absolute flex">{chords}</div>
     </div>
   );
 }

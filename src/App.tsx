@@ -26,7 +26,6 @@ function App() {
     if (isSelected) return;
 
     setSelected([...selected, data]);
-    console.log(selected);
   }
 
   function handlePrint() {
@@ -79,17 +78,9 @@ function App() {
         </div>
         <Sidebar open={isSidebarOpen} onClose={() => setSidebarOpen(false)}>
           <Sheet chords={selected} />
+          <Button onClick={handleClear}>Clear</Button>
           <Button
-            onClick={() => {
-              handleClear();
-            }}
-          >
-            Clear
-          </Button>
-          <Button
-            onClick={() => {
-              handlePrint();
-            }}
+            onClick={handlePrint}
             icon={<PrintIcon size={16} color="#fff" />}
           >
             Print
