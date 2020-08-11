@@ -9,10 +9,10 @@ interface ButtonProps {
 
 export default function Button(props: ButtonProps) {
   let classes =
-    "flex items-center justify-center p-2 pl-6 pr-6 m-2 text-white bg-red-600 rounded-full active:bg-red-800 focus:outline-none";
+    "flex items-center justify-center p-2 pl-6 pr-6 text-white bg-red-600 rounded-full active:bg-red-800 focus:outline-none";
   if (props.icon) {
     classes =
-      "flex items-center justify-begin p-2 pl-6 pr-6 m-2 text-white bg-red-600 rounded-full active:bg-red-800 focus:outline-none";
+      "flex items-center justify-begin p-2 pl-6 pr-6 text-white bg-red-600 rounded-full active:bg-red-800 focus:outline-none";
   }
 
   return (

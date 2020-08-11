@@ -19,10 +19,27 @@ ipcMain.on("read-config", (event) => {
     try {
       event.returnValue = JSON.parse(data);
     } catch (error) {
-      console.log(error);
       event.returnValue = [];
     }
   });
+});
+
+ipcMain.on("print-pdf", (event) => {
+  const pdfPath = path.join(__dirname, "print.pdf");
+  event.returnValue = pdfPath;
+  const win = BrowserWindow.fromWebContents(event.sender);
+  win.webContents
+    .printToPDF({})
+    .then((value: Buffer) => {
+      fs.writeFile(pdfPath, value, function (error) {
+        if (error) {
+          throw error;
+        }
+      });
+    })
+    .catch((reason) => {
+      console.log(reason);
+    });
 });
 
 const createWindow = () => {

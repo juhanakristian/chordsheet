@@ -39,7 +39,10 @@ function Sheet(props: SheetProps) {
   });
 
   return (
-    <div className="bg-white border border-solid shadow-xl aspect-ratio-a4">
+    <div
+      id="print"
+      className="bg-white border border-solid shadow-xl aspect-ratio-a4"
+    >
       <div className="absolute flex">{chords}</div>
     </div>
   );

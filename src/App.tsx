@@ -21,6 +21,8 @@ function App() {
   const [selected, setSelected] = useState([]);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
+  const [searchString, setSearchString] = useState("");
+
   function handleAddClicked(data: ChordData) {
     const isSelected = selected.find((c: ChordData) => c.name === data.name);
     if (isSelected) return;
@@ -30,10 +32,14 @@ function App() {
 
   function handlePrint() {
     console.log('"Print" clicked');
+    const result = ipcRenderer.sendSync("print-pdf");
+    console.log("IPC CALLED");
+    console.log({ result });
   }
 
   function handleClear() {
     console.log('"Clear" clicked');
+    setSelected([]);
   }
 
   useEffect(() => {
@@ -41,7 +47,16 @@ function App() {
     setChords(result);
   }, []);
 
-  const chordsComponents = chords.map((data) => {
+  const filteredChords = chords.filter((data: ChordData) => {
+    if (!searchString || searchString.length == 0) return true;
+
+    const pattern = new RegExp(`^${searchString}`);
+    if (pattern.test(data.name)) return true;
+
+    return false;
+  });
+
+  const chordsComponents = filteredChords.map((data: ChordData) => {
     const id = getChordIdentifier(data);
 
     return (
@@ -61,9 +76,9 @@ function App() {
         <div className="w-full overflow-auto overflow-x-hidden">
           <div className="flex pt-5 pl-5 pr-10">
             <Search
-              value=""
+              value={searchString}
               onChange={(value: string) => {
-                console.log(value);
+                setSearchString(value);
               }}
             />
             <div className="flex-grow"></div>
@@ -78,13 +93,15 @@ function App() {
         </div>
         <Sidebar open={isSidebarOpen} onClose={() => setSidebarOpen(false)}>
           <Sheet chords={selected} />
-          <Button onClick={handleClear}>Clear</Button>
-          <Button
-            onClick={handlePrint}
-            icon={<PrintIcon size={16} color="#fff" />}
-          >
-            Print
-          </Button>
+          <div className="flex justify-between mt-2">
+            <Button onClick={handleClear}>Clear</Button>
+            <Button
+              onClick={handlePrint}
+              icon={<PrintIcon size={16} color="#fff" />}
+            >
+              Print
+            </Button>
+          </div>
         </Sidebar>
       </div>
     </div>
