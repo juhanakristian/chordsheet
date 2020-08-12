@@ -8,6 +8,7 @@ import { getChordIdentifier } from "../App";
 
 interface SheetProps {
   chords: ChordData[];
+  ref: any;
 }
 
 function Sheet(props: SheetProps) {
@@ -42,6 +43,7 @@ function Sheet(props: SheetProps) {
     <div
       id="print"
       className="bg-white border border-solid shadow-xl aspect-ratio-a4"
+      ref={props.ref}
     >
       <div className="absolute flex">{chords}</div>
     </div>

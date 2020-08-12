@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import Sheet from "./components/Sheet";
 import Search from "./components/Search";
@@ -20,8 +20,9 @@ function App() {
   const [chords, setChords] = useState([]);
   const [selected, setSelected] = useState([]);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-
   const [searchString, setSearchString] = useState("");
+
+  const sheetRef = useRef(null);
 
   function handleAddClicked(data: ChordData) {
     const isSelected = selected.find((c: ChordData) => c.name === data.name);
@@ -31,10 +32,7 @@ function App() {
   }
 
   function handlePrint() {
-    console.log('"Print" clicked');
-    const result = ipcRenderer.sendSync("print-pdf");
-    console.log("IPC CALLED");
-    console.log({ result });
+    ipcRenderer.sendSync("print-pdf", sheetRef.current);
   }
 
   function handleClear() {
@@ -92,7 +90,7 @@ function App() {
           </div>
         </div>
         <Sidebar open={isSidebarOpen} onClose={() => setSidebarOpen(false)}>
-          <Sheet chords={selected} />
+          <Sheet ref={sheetRef} chords={selected} />
           <div className="flex justify-between mt-2">
             <Button onClick={handleClear}>Clear</Button>
             <Button
