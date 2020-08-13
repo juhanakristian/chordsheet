@@ -11,6 +11,8 @@ import PrintIcon from "./icons/PrintIcon";
 
 import { ipcRenderer } from "electron";
 
+import "./index.css";
+
 export function getChordIdentifier(data: ChordData) {
   const t = data.chord.join("").replace(/,/g, "");
   return `${data.name}-${t}`;
@@ -22,7 +24,7 @@ function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [searchString, setSearchString] = useState("");
 
-  const sheetRef = useRef(null);
+  const sheetRef: React.RefObject<HTMLDivElement> = useRef(null);
 
   function handleAddClicked(data: ChordData) {
     const isSelected = selected.find((c: ChordData) => c.name === data.name);
@@ -32,7 +34,8 @@ function App() {
   }
 
   function handlePrint() {
-    ipcRenderer.sendSync("print-pdf", sheetRef.current);
+    console.log({ sheetRef });
+    ipcRenderer.sendSync("print-pdf");
   }
 
   function handleClear() {
@@ -85,7 +88,7 @@ function App() {
             </IconButton>
           </div>
 
-          <div className="grid grid-flow-row grid-cols-8 gap-4 p-5 ">
+          <div className="grid grid-flow-row grid-cols-8 gap-4 p-5 debug">
             {chordsComponents}
           </div>
         </div>

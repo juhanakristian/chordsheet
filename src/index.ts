@@ -28,7 +28,7 @@ ipcMain.on("print-pdf", (event, contents) => {
   // workerWindow.webContents.send("printPDF", contents)
   const pdfPath = path.join(__dirname, "print.pdf");
   event.returnValue = pdfPath;
-  const win = BrowserWindow.fromWebContents(contents);
+  const win = BrowserWindow.fromWebContents(event.sender);
   win.webContents
     .printToPDF({})
     .then((value: Buffer) => {

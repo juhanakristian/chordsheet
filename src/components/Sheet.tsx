@@ -6,9 +6,12 @@ import { ChordData } from "./Chord";
 
 import { getChordIdentifier } from "../App";
 
+import "../index.css";
+
 interface SheetProps {
   chords: ChordData[];
-  ref: any;
+  innerRef?: any;
+  ref?: any;
 }
 
 function Sheet(props: SheetProps) {
@@ -41,13 +44,15 @@ function Sheet(props: SheetProps) {
 
   return (
     <div
-      id="print"
       className="bg-white border border-solid shadow-xl aspect-ratio-a4"
-      ref={props.ref}
+      ref={props.innerRef}
     >
-      <div className="absolute flex">{chords}</div>
+      <div className="absolute flex print debug">{chords}</div>
     </div>
   );
 }
 
-export default Sheet;
+// eslint-disable-next-line react/display-name
+export default React.forwardRef((props: SheetProps, ref) => (
+  <Sheet innerRef={ref} {...props} />
+));
