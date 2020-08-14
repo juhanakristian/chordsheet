@@ -12,6 +12,7 @@ import PrintIcon from "./icons/PrintIcon";
 import { ipcRenderer } from "electron";
 
 import "./index.css";
+import PrintSheet from "./components/PrintSheet";
 
 export function getChordIdentifier(data: ChordData) {
   const t = data.chord.join("").replace(/,/g, "");
@@ -72,40 +73,43 @@ function App() {
   });
 
   return (
-    <div className="flex flex-col w-full h-screen max-h-screen overflow-hidden">
-      <div className="flex flex-row w-full h-full">
-        <div className="w-full overflow-auto overflow-x-hidden">
-          <div className="flex pt-5 pl-5 pr-10">
-            <Search
-              value={searchString}
-              onChange={(value: string) => {
-                setSearchString(value);
-              }}
-            />
-            <div className="flex-grow"></div>
-            <IconButton onClick={() => setSidebarOpen(!isSidebarOpen)}>
-              <PrintIcon size={24} />
-            </IconButton>
-          </div>
+    <>
+      <PrintSheet chords={selected} />
+      <div className="flex flex-col w-full h-screen max-h-screen overflow-hidden no-print">
+        <div className="flex flex-row w-full h-full">
+          <div className="w-full overflow-auto overflow-x-hidden">
+            <div className="flex pt-5 pl-5 pr-10">
+              <Search
+                value={searchString}
+                onChange={(value: string) => {
+                  setSearchString(value);
+                }}
+              />
+              <div className="flex-grow"></div>
+              <IconButton onClick={() => setSidebarOpen(!isSidebarOpen)}>
+                <PrintIcon size={24} />
+              </IconButton>
+            </div>
 
-          <div className="grid grid-flow-row grid-cols-8 gap-4 p-5 debug">
-            {chordsComponents}
+            <div className="grid grid-flow-row grid-cols-8 gap-4 p-5 debug">
+              {chordsComponents}
+            </div>
           </div>
+          <Sidebar open={isSidebarOpen} onClose={() => setSidebarOpen(false)}>
+            <Sheet chords={selected} />
+            <div className="flex justify-between mt-2">
+              <Button onClick={handleClear}>Clear</Button>
+              <Button
+                onClick={handlePrint}
+                icon={<PrintIcon size={16} color="#fff" />}
+              >
+                Print
+              </Button>
+            </div>
+          </Sidebar>
         </div>
-        <Sidebar open={isSidebarOpen} onClose={() => setSidebarOpen(false)}>
-          <Sheet ref={sheetRef} chords={selected} />
-          <div className="flex justify-between mt-2">
-            <Button onClick={handleClear}>Clear</Button>
-            <Button
-              onClick={handlePrint}
-              icon={<PrintIcon size={16} color="#fff" />}
-            >
-              Print
-            </Button>
-          </div>
-        </Sidebar>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -5,13 +5,17 @@ body {
   overflow-x: hidden;
 }
 
+.print {
+  display: none;
+}
+
 @media print {
-  * {
-    background-color: red;
+  .no-print {
+    display: none;
   }
 
   .print {
-    /* display: block !important; */
-    background-color: tomato;
+    display: block !important;
+    border: solid 2px red !important;
   }
 }

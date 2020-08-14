@@ -12,11 +12,11 @@ interface SheetProps {
   chords: ChordData[];
 }
 
-function Sheet(props: SheetProps) {
+function PrintSheet(props: SheetProps) {
   useEffect(() => {
     for (const c of props.chords) {
       const id = getChordIdentifier(c);
-      const selector = `#sheet_${id}`;
+      const selector = `#printsheet_${id}`;
       // Clear the container
       document.querySelector(selector).innerHTML = "";
 
@@ -26,8 +26,8 @@ function Sheet(props: SheetProps) {
           chord: c.chord,
         },
         {
-          width: 50,
-          height: 70,
+          width: 150,
+          height: 210,
         }
       );
     }
@@ -36,15 +36,19 @@ function Sheet(props: SheetProps) {
   const chords = props.chords.map((c: ChordData) => {
     const id = getChordIdentifier(c);
     return (
-      <div style={{ width: 50, height: 70 }} key={id} id={`sheet_${id}`}></div>
+      <div
+        style={{ width: 150, height: 210 }}
+        key={id}
+        id={`printsheet_${id}`}
+      ></div>
     );
   });
 
   return (
-    <div className="bg-white border border-solid shadow-xl aspect-ratio-a4">
+    <div className="w-full h-full bg-white border border-solid shadow-xl aspect-ratio-a4 print">
       <div className="absolute flex">{chords}</div>
     </div>
   );
 }
 
-export default Sheet;
+export default PrintSheet;
