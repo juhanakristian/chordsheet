@@ -36,7 +36,8 @@ function App() {
 
   function handlePrint() {
     console.log({ sheetRef });
-    ipcRenderer.sendSync("print-pdf");
+    // ipcRenderer.sendSync("print-pdf");
+    window.print();
   }
 
   function handleClear() {
@@ -78,7 +79,7 @@ function App() {
       <div className="flex flex-col w-full h-screen max-h-screen overflow-hidden no-print">
         <div className="flex flex-row w-full h-full">
           <div className="w-full overflow-auto overflow-x-hidden">
-            <div className="flex pt-5 pl-5 pr-10">
+            <div className="flex pt-5 pl-5 pr-10 no-print">
               <Search
                 value={searchString}
                 onChange={(value: string) => {
