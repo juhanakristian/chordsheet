@@ -32,7 +32,7 @@ function Chord(props: ChordProps) {
     draw(
       selector,
       {
-        chord: props.data.chord,
+        ...props.data,
       },
       {
         width: container.current.offsetWidth,

@@ -23,7 +23,7 @@ function Sheet(props: SheetProps) {
       draw(
         selector,
         {
-          chord: c.chord,
+          ...c,
         },
         {
           width: 50,

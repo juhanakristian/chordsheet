@@ -25,8 +25,6 @@ function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [searchString, setSearchString] = useState("");
 
-  const sheetRef: React.RefObject<HTMLDivElement> = useRef(null);
-
   function handleAddClicked(data: ChordData) {
     const isSelected = selected.find((c: ChordData) => c.name === data.name);
     if (isSelected) return;
@@ -35,8 +33,6 @@ function App() {
   }
 
   function handlePrint() {
-    console.log({ sheetRef });
-    // ipcRenderer.sendSync("print-pdf");
     window.print();
   }
 
