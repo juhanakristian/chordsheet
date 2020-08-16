@@ -24,25 +24,6 @@ ipcMain.on("read-config", (event) => {
   });
 });
 
-ipcMain.on("print-pdf", (event, contents) => {
-  // workerWindow.webContents.send("printPDF", contents)
-  const pdfPath = path.join(__dirname, "print.pdf");
-  event.returnValue = pdfPath;
-  const win = BrowserWindow.fromWebContents(event.sender);
-  win.webContents
-    .printToPDF({})
-    .then((value: Buffer) => {
-      fs.writeFile(pdfPath, value, function (error) {
-        if (error) {
-          throw error;
-        }
-      });
-    })
-    .catch((reason) => {
-      console.log(reason);
-    });
-});
-
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -58,10 +39,6 @@ const createWindow = () => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
-
-  // const workerWindow = new BrowserWindow();
-  // workerWindow.loadURL(`file://${__dirname__}/printer.html`);
-  // workerWindow.hide();
 };
 
 // This method will be called when Electron has finished
