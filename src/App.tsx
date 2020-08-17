@@ -42,8 +42,12 @@ function App() {
   }
 
   useEffect(() => {
-    const result = ipcRenderer.sendSync("read-config");
-    setChords(result);
+    async function invokeAsync() {
+      const result = await ipcRenderer.invoke("read-config");
+      setChords(result);
+    }
+
+    invokeAsync();
   }, []);
 
   const filteredChords = chords.filter((data: ChordData) => {

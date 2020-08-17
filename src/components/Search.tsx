@@ -12,11 +12,11 @@ function Search(props: SearchProps) {
       type="text"
       name="search"
       id="search"
+      role="search"
       value={props.value}
       onChange={(e) => props.onChange(e.target.value)}
       placeholder="Filter..."
-    >
-    </input>
+    ></input>
   );
 }
 

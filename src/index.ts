@@ -2,7 +2,7 @@ import { app, BrowserWindow, ipcMain } from "electron";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
-import * as fs from "fs";
+import { promises as fs } from "fs";
 import * as path from "path";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -11,17 +11,15 @@ if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
-ipcMain.on("read-config", (event) => {
+ipcMain.handle("read-config", async (event) => {
   const filePath = path.resolve(__dirname, "chords.json");
-  fs.readFile(filePath, "utf8", (err: NodeJS.ErrnoException, data: string) => {
-    if (err) throw err;
+  const data = await fs.readFile(filePath, "utf8");
 
-    try {
-      event.returnValue = JSON.parse(data);
-    } catch (error) {
-      event.returnValue = [];
-    }
-  });
+  try {
+    return JSON.parse(data);
+  } catch (error) {
+    return [];
+  }
 });
 
 const createWindow = () => {
