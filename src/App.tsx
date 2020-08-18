@@ -42,12 +42,17 @@ function App() {
   }
 
   useEffect(() => {
+    let cancel = false;
     async function invokeAsync() {
       const result = await ipcRenderer.invoke("read-config");
-      setChords(result);
+      if (!cancel) setChords(result);
     }
 
     invokeAsync();
+
+    return () => {
+      cancel = true;
+    };
   }, []);
 
   const filteredChords = chords.filter((data: ChordData) => {

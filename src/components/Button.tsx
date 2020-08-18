@@ -17,7 +17,7 @@ export default function Button(props: ButtonProps) {
 
   return (
     <div>
-      <button className={classes} onClick={props.onClick}>
+      <button role="button" className={classes} onClick={props.onClick}>
         {props.icon && <div className="mr-2">{props.icon}</div>}
         {props.children}
       </button>
