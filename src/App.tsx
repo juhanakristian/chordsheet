@@ -93,10 +93,9 @@ function App() {
               />
               <div className="flex-grow"></div>
               <IconButton
-                name="preview"
+                label="preview"
                 onClick={() => setSidebarOpen(!isSidebarOpen)}
               >
-                Preview
                 <PrintIcon size={24} />
               </IconButton>
             </div>

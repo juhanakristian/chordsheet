@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 
 interface IconButtonProps {
-  name: string;
+  label?: string;
   children: ReactNode;
   onClick: () => void;
 }
@@ -16,7 +16,7 @@ export default function IconButton(props: IconButtonProps) {
       <button
         className="flex items-center justify-center w-6 h-6 rounded-full focus:outline-none"
         onClick={handleClick}
-        name={props.name}
+        aria-label={props.label}
       >
         {props.children}
       </button>
