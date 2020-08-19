@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { ipcMain } from "../../__mocks__/electron";
 
@@ -23,10 +23,15 @@ describe("app", () => {
       ];
     });
   });
-  test("renders app without crashing", () => {
+
+  test("renders without crashing", () => {
     render(<App />);
     expect(screen.getByRole("search")).not.toBeNull();
   });
 
-  test("sidebar opens when print button clicked", () => {});
+  test("sidebar opens when print button clicked", () => {
+    render(<App />);
+    fireEvent.click(screen.getByRole("button", { name: /preview/i }));
+    expect(screen.getByRole("heading", { name: /preview/i })).toBeVisible();
+  });
 });

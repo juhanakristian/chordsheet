@@ -28,7 +28,7 @@ export default function Sidebar(props: SidebarProps) {
         }}
       >
         <div className="p-2">
-          <IconButton onClick={() => props.onClose()}>
+          <IconButton name="close" onClick={() => props.onClose()}>
             <CloseIcon color="white" size={24} />
           </IconButton>
         </div>

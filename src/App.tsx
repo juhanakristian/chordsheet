@@ -92,7 +92,11 @@ function App() {
                 }}
               />
               <div className="flex-grow"></div>
-              <IconButton onClick={() => setSidebarOpen(!isSidebarOpen)}>
+              <IconButton
+                name="preview"
+                onClick={() => setSidebarOpen(!isSidebarOpen)}
+              >
+                Preview
                 <PrintIcon size={24} />
               </IconButton>
             </div>
@@ -101,7 +105,14 @@ function App() {
               {chordsComponents}
             </div>
           </div>
-          <Sidebar open={isSidebarOpen} onClose={() => setSidebarOpen(false)}>
+          <Sidebar
+            data-testid="sidebar"
+            open={isSidebarOpen}
+            onClose={() => setSidebarOpen(false)}
+          >
+            <h2 role="heading" className="mb-4 text-xl text-white">
+              Preview
+            </h2>
             <Sheet chords={selected} />
             <div className="flex justify-between mt-2">
               <Button onClick={handleClear}>Clear</Button>
