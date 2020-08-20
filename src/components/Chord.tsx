@@ -48,7 +48,7 @@ function Chord(props: ChordProps) {
       onMouseLeave={() => setHover(false)}
     >
       <div className="flex flex-row pl-2 pr-2 bg-gray-200 group-hover:bg-blue-400">
-        <div className="flex-grow group-hover:text-white">
+        <div role="heading" className="flex-grow group-hover:text-white">
           {props.data.name}
         </div>
         {hover && (
