@@ -42,16 +42,16 @@ function App() {
   }
 
   useEffect(() => {
-    let cancel = false;
+    let mounted = true;
     async function invokeAsync() {
       const result = await ipcRenderer.invoke("read-config");
-      if (!cancel) setChords(result);
+      if (mounted) setChords(result);
     }
 
     invokeAsync();
 
     return () => {
-      cancel = true;
+      mounted = false;
     };
   }, []);
 
