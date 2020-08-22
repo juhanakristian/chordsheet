@@ -36,7 +36,12 @@ function Sheet(props: SheetProps) {
   const chords = props.chords.map((c: ChordData) => {
     const id = getChordIdentifier(c);
     return (
-      <div style={{ width: 50, height: 70 }} key={id} id={`sheet_${id}`}></div>
+      <div
+        data-testid={`sheet-chord-${id}`}
+        style={{ width: 50, height: 70 }}
+        key={id}
+        id={`sheet_${id}`}
+      ></div>
     );
   });
 

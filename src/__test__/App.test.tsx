@@ -8,6 +8,13 @@ import App from "../App";
 
 describe("app", () => {
   beforeAll(() => {
+    (window as any).SVGElement.prototype.getBBox = () => ({
+      x: 0,
+      y: 0,
+    });
+
+    (window as any).SVGElement.prototype.getComputedTextLength = () => 200;
+
     ipcMain.handle("read-config", () => {
       return [
         {
@@ -51,9 +58,23 @@ describe("app", () => {
     render(<App />);
     user.type(screen.getByRole("search"), "Am");
     const am = await screen.findByRole("heading", { name: /Am/i });
-    const c = await screen.findByRole("heading", { name: /C/i });
+    const c = await screen.queryByRole("heading", { name: /C/i });
 
     expect(am).not.toBeNull();
     expect(c).toBeNull();
+  });
+
+  test("shows added chord in sheet", async () => {
+    render(<App />);
+    user.type(screen.getByRole("search"), "Am");
+
+    user.hover(await screen.findByRole("heading", { name: /Am/i }));
+    const am = await screen.findByRole("button", { name: /add/i });
+    user.click(am);
+
+    user.click(screen.getByRole("heading", { name: /preview/i }));
+
+    const chord = screen.getByTestId(/sheet-chord-Am-10213242506x/i);
+    expect(chord).not.toBeNull();
   });
 });
