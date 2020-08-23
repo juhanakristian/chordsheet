@@ -58,7 +58,7 @@ describe("app", () => {
     render(<App />);
     user.type(screen.getByRole("search"), "Am");
     const am = await screen.findByRole("heading", { name: /Am/i });
-    const c = await screen.queryByRole("heading", { name: /C/i });
+    const c = await screen.queryByRole("heading", { name: "C" });
 
     expect(am).not.toBeNull();
     expect(c).toBeNull();
@@ -66,6 +66,7 @@ describe("app", () => {
 
   test("shows added chord in sheet", async () => {
     render(<App />);
+    //FIXME: Depends on search working
     user.type(screen.getByRole("search"), "Am");
 
     user.hover(await screen.findByRole("heading", { name: /Am/i }));
@@ -76,5 +77,22 @@ describe("app", () => {
 
     const chord = screen.getByTestId(/sheet-chord-Am-10213242506x/i);
     expect(chord).not.toBeNull();
+  });
+
+  test("clears the selected chords when clear is clicked", async () => {
+    render(<App />);
+    //FIXME: Depends on search working
+    user.type(screen.getByRole("search"), "Am");
+
+    user.hover(await screen.findByRole("heading", { name: /Am/i }));
+    const am = await screen.findByRole("button", { name: /add/i });
+    user.click(am);
+
+    user.click(screen.getByRole("heading", { name: /preview/i }));
+
+    user.click(screen.getByRole("button", { name: /Clear/i }));
+
+    const chord = screen.queryByTestId(/sheet-chord-Am-10213242506x/i);
+    expect(chord).toBeNull();
   });
 });
