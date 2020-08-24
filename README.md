@@ -17,6 +17,6 @@ Chord Sheet is a Electron app for creating printable guitar chord sheets. I star
 - [x] Print chord sheet
 - [x] Support barre chords
 - [x] Integration tests using testing-library
-- [ ] Better visual indication when chords are selected
+- [x] Better visual indication when chords are selected
 - [ ] Chord name in printed sheet
 - [ ] Add more chords

@@ -97,6 +97,14 @@ function App() {
                 onClick={() => setSidebarOpen(!isSidebarOpen)}
               >
                 <PrintIcon size={24} />
+                {selected.length > 0 && (
+                  <div
+                    className="absolute top-0 w-4 h-4 mt-4 ml-2 text-xs text-white bg-red-600 rounded-full"
+                    data-testid="selected-count"
+                  >
+                    {selected.length}
+                  </div>
+                )}
               </IconButton>
             </div>
 
