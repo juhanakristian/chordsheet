@@ -39,7 +39,7 @@ function Chord(props: ChordProps) {
         height: container.current.offsetWidth * (70 / 50),
       }
     );
-  }, [container, width]);
+  }, [container, width, props.identifier, props.data]);
 
   return (
     <div

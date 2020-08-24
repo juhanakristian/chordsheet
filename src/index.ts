@@ -11,7 +11,7 @@ if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
-ipcMain.handle("read-config", async (event) => {
+ipcMain.handle("read-config", async () => {
   const filePath = path.resolve(__dirname, "chords.json");
   const data = await fs.readFile(filePath, "utf8");
 
