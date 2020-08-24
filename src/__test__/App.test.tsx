@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, getByTestId } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import user from "@testing-library/user-event";
 import { ipcMain } from "../../__mocks__/electron";
@@ -8,11 +8,13 @@ import App from "../App";
 
 describe("app", () => {
   beforeAll(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).SVGElement.prototype.getBBox = () => ({
       x: 0,
       y: 0,
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).SVGElement.prototype.getComputedTextLength = () => 200;
 
     ipcMain.handle("read-config", () => {
