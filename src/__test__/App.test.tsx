@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import user from "@testing-library/user-event";
 import { ipcMain } from "../../__mocks__/electron";
@@ -8,6 +8,7 @@ import App from "../App";
 
 describe("app", () => {
   beforeAll(() => {
+    // vexchords.draw.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).SVGElement.prototype.getBBox = () => ({
       x: 0,
@@ -58,44 +59,53 @@ describe("app", () => {
 
   test("shows filtered chords after typing into search field", async () => {
     render(<App />);
-    user.type(screen.getByRole("search"), "Am");
-    const am = await screen.findByRole("heading", { name: /Am/i });
-    const c = await screen.queryByRole("heading", { name: "C" });
+    await waitFor(() =>
+      expect(screen.queryByRole("heading", { name: /Am/i })).not.toBeNull()
+    );
 
-    expect(am).not.toBeNull();
-    expect(c).toBeNull();
+    user.type(screen.getByRole("search"), "Am");
+
+    expect(screen.queryByRole("heading", { name: /Am/i })).not.toBeNull();
+    expect(screen.queryByRole("heading", { name: /C/i })).toBeNull();
   });
 
   test("shows added chord in sheet", async () => {
     render(<App />);
+    await waitFor(() =>
+      expect(screen.queryByRole("heading", { name: /Am/i })).not.toBeNull()
+    );
 
-    user.hover(await screen.findByRole("heading", { name: /Am/i }));
-    user.click(await screen.findByRole("button", { name: /add/i }));
+    user.hover(screen.getByRole("heading", { name: /Am/i }));
+    user.click(screen.getByRole("button", { name: /add/i }));
 
     user.click(screen.getByRole("heading", { name: /preview/i }));
 
-    const chord = screen.getByTestId(/sheet-chord-Am-10213242506x/i);
-    expect(chord).not.toBeNull();
+    expect(screen.getByTestId(/sheet-chord-Am-10213242506x/i)).not.toBeNull();
   });
 
   test("clears the selected chords when clear is clicked", async () => {
     render(<App />);
+    await waitFor(() =>
+      expect(screen.queryByRole("heading", { name: /Am/i })).not.toBeNull()
+    );
 
-    user.hover(await screen.findByRole("heading", { name: /Am/i }));
-    user.click(await screen.findByRole("button", { name: /add/i }));
+    user.hover(screen.getByRole("heading", { name: /Am/i }));
+    user.click(screen.getByRole("button", { name: /add/i }));
 
     user.click(screen.getByRole("heading", { name: /preview/i }));
     user.click(screen.getByRole("button", { name: /clear/i }));
 
-    const chord = screen.queryByTestId(/sheet-chord-Am-10213242506x/i);
-    expect(chord).toBeNull();
+    expect(screen.queryByTestId(/sheet-chord-Am-10213242506x/i)).toBeNull();
   });
 
   test("shows a icon with number of chords added when a chord is selected", async () => {
     render(<App />);
+    await waitFor(() =>
+      expect(screen.queryByRole("heading", { name: /Am/i })).not.toBeNull()
+    );
 
-    user.hover(await screen.findByRole("heading", { name: /Am/i }));
-    user.click(await screen.findByRole("button", { name: /add/i }));
+    user.hover(screen.getByRole("heading", { name: /Am/i }));
+    user.click(screen.getByRole("button", { name: /add/i }));
 
     expect(screen.getByTestId("selected-count")).toHaveTextContent("1");
   });

@@ -36,11 +36,15 @@ function PrintSheet(props: SheetProps) {
   const chords = props.chords.map((c: ChordData) => {
     const id = getChordIdentifier(c);
     return (
-      <div
-        style={{ width: 150, height: 210 }}
-        key={id}
-        id={`printsheet_${id}`}
-      ></div>
+      <div key={id}>
+        <div className="m-auto text-sm text-center" style={{ width: 150 }}>
+          {c.name}
+        </div>
+        <div
+          style={{ width: 150, height: 210, marginTop: -10 }}
+          id={`printsheet_${id}`}
+        ></div>
+      </div>
     );
   });
 
