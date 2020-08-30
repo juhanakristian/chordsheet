@@ -49,8 +49,8 @@ function PrintSheet(props: SheetProps) {
   });
 
   return (
-    <div className="w-full h-full bg-white border border-solid shadow-xl aspect-ratio-a4 print">
-      <div className="absolute flex">{chords}</div>
+    <div className="relative p-2 bg-white border border-solid shadow-xl aspect-ratio-a4 print">
+      <div className="absolute flex flex-wrap min-w-full">{chords}</div>
     </div>
   );
 }

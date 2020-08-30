@@ -51,8 +51,8 @@ function Sheet(props: SheetProps) {
   });
 
   return (
-    <div className="p-2 bg-white border border-solid shadow-xl aspect-ratio-a4">
-      <div className="absolute flex">{chords}</div>
+    <div className="relative p-2 bg-white border border-solid shadow-xl aspect-ratio-a4">
+      <div className="absolute flex flex-wrap min-w-full">{chords}</div>
     </div>
   );
 }
