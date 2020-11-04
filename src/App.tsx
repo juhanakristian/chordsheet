@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import Sheet from "./components/Sheet";
 import Search from "./components/Search";
@@ -20,10 +20,10 @@ export function getChordIdentifier(data: ChordData) {
 }
 
 function App() {
-  const [chords, setChords] = useState([]);
-  const [selected, setSelected] = useState([]);
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [searchString, setSearchString] = useState("");
+  const [chords, setChords] = React.useState([]);
+  const [selected, setSelected] = React.useState([]);
+  const [isSidebarOpen, setSidebarOpen] = React.useState(false);
+  const [searchString, setSearchString] = React.useState("");
 
   function handleAddClicked(data: ChordData) {
     const isSelected = selected.find((c: ChordData) => c.name === data.name);
@@ -41,7 +41,7 @@ function App() {
     setSelected([]);
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     let mounted = true;
     async function invokeAsync() {
       const result = await ipcRenderer.invoke("read-config");

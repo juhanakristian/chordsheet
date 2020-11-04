@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 
 import { draw } from "vexchords";
 
@@ -20,11 +20,11 @@ interface ChordProps {
 }
 
 function Chord(props: ChordProps) {
-  const container = useRef(null);
-  const [hover, setHover] = useState(false);
+  const container = React.useRef(null);
+  const [hover, setHover] = React.useState(false);
   const { width } = useWindowSize();
 
-  useEffect(() => {
+  React.useLayoutEffect(() => {
     const selector = `#${props.identifier}`;
     // Clear the container
     document.querySelector(selector).innerHTML = "";

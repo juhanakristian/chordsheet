@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { draw } from "vexchords";
 
@@ -13,7 +13,7 @@ interface SheetProps {
 }
 
 function PrintSheet(props: SheetProps) {
-  useEffect(() => {
+  React.useLayoutEffect(() => {
     for (const c of props.chords) {
       const id = getChordIdentifier(c);
       const selector = `#printsheet_${id}`;
