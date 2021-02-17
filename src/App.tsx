@@ -13,6 +13,7 @@ import { ipcRenderer } from "electron";
 
 import "./index.css";
 import PrintSheet from "./components/PrintSheet";
+import SheetTitle from "./components/SheetTitle";
 
 export function getChordIdentifier(data: ChordData) {
   const t = data.chord.join("").replace(/,/g, "");
@@ -84,14 +85,16 @@ function App() {
       <div className="flex flex-col w-full h-screen max-h-screen overflow-hidden no-print">
         <div className="flex flex-row w-full h-full">
           <div className="w-full overflow-auto overflow-x-hidden">
-            <div className="flex pt-5 pl-5 pr-10 no-print">
+            <div className="flex justify-center pt-2">
+              <SheetTitle />
+            </div>
+            <div className="flex justify-between pt-5 pl-5 pr-10 no-print">
               <Search
                 value={searchString}
                 onChange={(value: string) => {
                   setSearchString(value);
                 }}
               />
-              <div className="flex-grow"></div>
               <IconButton
                 label="preview"
                 onClick={() => setSidebarOpen(!isSidebarOpen)}
