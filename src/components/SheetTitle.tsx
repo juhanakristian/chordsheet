@@ -1,7 +1,9 @@
 import React from "react";
 
+const defaultText = "Set sheet title..✍️";
+
 export default function SheetTitle() {
-  const [title, setTitle] = React.useState("Set sheet title..");
+  const [title, setTitle] = React.useState(defaultText);
   const edited = React.useRef(false);
 
   return (
@@ -12,6 +14,9 @@ export default function SheetTitle() {
       onChange={(e) => {
         edited.current = true;
         setTitle(e.currentTarget.value);
+      }}
+      onBlur={() => {
+        if (!title || title.length === 0) setTitle(defaultText);
       }}
       onFocus={() => {
         if (!edited.current) {
