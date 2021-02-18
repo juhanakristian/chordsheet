@@ -8,7 +8,7 @@ export default function SheetTitle() {
 
   return (
     <input
-      className="text-2xl text-center border-none outline-none"
+      className="text-3xl text-center border-none outline-none"
       name="title"
       value={title}
       onChange={(e) => {

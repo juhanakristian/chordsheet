@@ -14,6 +14,7 @@ import { ipcRenderer } from "electron";
 import "./index.css";
 import PrintSheet from "./components/PrintSheet";
 import SheetTitle from "./components/SheetTitle";
+import AddChord from "./components/AddChord";
 
 export function getChordIdentifier(data: ChordData) {
   const t = data.chord.join("").replace(/,/g, "");
@@ -85,55 +86,27 @@ function App() {
       <div className="flex flex-col w-full h-screen max-h-screen overflow-hidden no-print">
         <div className="flex flex-row w-full h-full">
           <div className="w-full overflow-auto overflow-x-hidden">
-            <div className="flex justify-center pt-2">
+            <div className="flex justify-center pt-4">
               <SheetTitle />
             </div>
             <div className="flex justify-between pt-5 pl-5 pr-10 no-print">
-              <Search
+              {/* <Search
                 value={searchString}
                 onChange={(value: string) => {
                   setSearchString(value);
                 }}
-              />
-              <IconButton
-                label="preview"
-                onClick={() => setSidebarOpen(!isSidebarOpen)}
-              >
-                <PrintIcon size={24} />
-                {selected.length > 0 && (
-                  <div
-                    className="absolute top-0 w-4 h-4 mt-4 ml-2 text-xs text-white bg-red-600 rounded-full"
-                    data-testid="selected-count"
-                  >
-                    {selected.length}
-                  </div>
-                )}
+              /> */}
+              <h2 className="text-2xl">Chords</h2>
+              <IconButton label="print" onClick={handlePrint}>
+                <PrintIcon />
               </IconButton>
             </div>
 
-            <div className="grid grid-flow-row grid-cols-8 gap-4 p-5 debug">
-              {chordsComponents}
+            <div className="grid grid-flow-row grid-cols-6 gap-4 p-5 debug">
+              {/* {chordsComponents} */}
+              <AddChord onClick={() => {}} />
             </div>
           </div>
-          <Sidebar
-            data-testid="sidebar"
-            open={isSidebarOpen}
-            onClose={() => setSidebarOpen(false)}
-          >
-            <h2 role="heading" className="mb-4 text-xl text-white">
-              Preview
-            </h2>
-            <Sheet chords={selected} />
-            <div className="flex justify-between mt-2">
-              <Button onClick={handleClear}>Clear</Button>
-              <Button
-                onClick={handlePrint}
-                icon={<PrintIcon size={16} color="#fff" />}
-              >
-                Print
-              </Button>
-            </div>
-          </Sidebar>
         </div>
       </div>
     </>

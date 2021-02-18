@@ -12,14 +12,12 @@ export default function IconButton(props: IconButtonProps) {
   }
 
   return (
-    <div>
-      <button
-        className="flex items-center justify-center w-6 h-6 rounded-full focus:outline-none"
-        onClick={handleClick}
-        aria-label={props.label}
-      >
-        {props.children}
-      </button>
-    </div>
+    <button
+      className="focus:outline-none"
+      onClick={handleClick}
+      aria-label={props.label}
+    >
+      {props.children}
+    </button>
   );
 }
