@@ -53,7 +53,7 @@ function Chord(props: ChordProps) {
         </div>
         {hover && (
           <IconButton label="add" onClick={() => props.onAdd(props.data)}>
-            <AddIcon size={12} color="#ffffff" />
+            <AddIcon />
           </IconButton>
         )}
       </div>
