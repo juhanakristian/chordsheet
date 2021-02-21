@@ -26,10 +26,15 @@ export function Modal({ title, children, open, onClose }: Props) {
     >
       <div
         className="fixed z-20 bg-white rounded-md shadow-lg top-20 left-20 right-20"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dialog-title"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between p-4 border-b-2 border-gray-100">
-          <h2 className="text-2xl">{title}</h2>
+          <h2 id="dialog-title" className="text-2xl">
+            {title}
+          </h2>
           <IconButton label="close" onClick={onClose}>
             <CloseIcon />
           </IconButton>
