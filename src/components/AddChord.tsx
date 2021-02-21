@@ -17,6 +17,7 @@ export default function AddChord({ onClick }: Props) {
       className="flex flex-col overflow-hidden bg-gray-100 border-2 border-solid rounded-lg cursor-pointer group hover:border-blue-400"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      onClick={onClick}
     >
       {/* <div className="flex flex-row pl-2 pr-2 bg-gray-200 group-hover:bg-blue-400"></div> */}
       <div
@@ -25,9 +26,7 @@ export default function AddChord({ onClick }: Props) {
       >
         <div className="absolute top-0 left-0 w-full h-full">
           <div className="flex items-center justify-center w-full h-full">
-            <IconButton label="add" onClick={onClick}>
-              <AddIcon />
-            </IconButton>
+            <AddIcon />
           </div>
         </div>
       </div>

@@ -43,7 +43,7 @@ function Chord(props: ChordProps) {
 
   return (
     <div
-      className="flex flex-col overflow-hidden border-2 border-solid rounded-lg group hover:border-blue-400"
+      className="flex flex-col overflow-hidden border-2 border-solid rounded-lg cursor-pointer group hover:border-blue-400"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -51,11 +51,6 @@ function Chord(props: ChordProps) {
         <div role="heading" className="flex-grow group-hover:text-white">
           {props.data.name}
         </div>
-        {hover && (
-          <IconButton label="add" onClick={() => props.onAdd(props.data)}>
-            <AddIcon />
-          </IconButton>
-        )}
       </div>
       <div>
         <div

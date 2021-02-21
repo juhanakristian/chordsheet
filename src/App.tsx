@@ -15,6 +15,7 @@ import "./index.css";
 import PrintSheet from "./components/PrintSheet";
 import SheetTitle from "./components/SheetTitle";
 import AddChord from "./components/AddChord";
+import ChordModal from "./components/ChordModal";
 
 export function getChordIdentifier(data: ChordData) {
   const t = data.chord.join("").replace(/,/g, "");
@@ -26,6 +27,7 @@ function App() {
   const [selected, setSelected] = React.useState([]);
   const [isSidebarOpen, setSidebarOpen] = React.useState(false);
   const [searchString, setSearchString] = React.useState("");
+  const [chordDialogOpen, setChordDialogOpen] = React.useState(false);
 
   function handleAddClicked(data: ChordData) {
     const isSelected = selected.find((c: ChordData) => c.name === data.name);
@@ -83,6 +85,12 @@ function App() {
   return (
     <>
       <PrintSheet chords={selected} />
+      <ChordModal
+        open={chordDialogOpen}
+        onClose={() => setChordDialogOpen(false)}
+        onSave={() => {}}
+        chords={chords}
+      />
       <div className="flex flex-col w-full h-screen max-h-screen overflow-hidden no-print">
         <div className="flex flex-row w-full h-full">
           <div className="w-full overflow-auto overflow-x-hidden">
@@ -104,7 +112,7 @@ function App() {
 
             <div className="grid grid-flow-row grid-cols-6 gap-4 p-5 debug">
               {/* {chordsComponents} */}
-              <AddChord onClick={() => {}} />
+              <AddChord onClick={() => setChordDialogOpen(true)} />
             </div>
           </div>
         </div>

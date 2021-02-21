@@ -27,7 +27,7 @@ module.exports = {
     },
   },
   variants: {
-    backgroundColor: ["group-hover", "active"],
+    backgroundColor: ["group-hover", "active", "hover"],
     textColor: ["group-hover"],
   },
   plugins: [require("tailwindcss-aspect-ratio")],

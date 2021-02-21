@@ -13,7 +13,7 @@ export default function IconButton(props: IconButtonProps) {
 
   return (
     <button
-      className="focus:outline-none"
+      className="flex items-center justify-center w-10 h-10 p-2 rounded-full focus:outline-none hover:bg-gray-100"
       onClick={handleClick}
       aria-label={props.label}
     >
