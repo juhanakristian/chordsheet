@@ -1,11 +1,12 @@
 import React from "react";
+import Button from "./Button";
 import Chord, { ChordData } from "./Chord";
 
-import { Modal, ModalContent } from "./Modal";
+import { Modal, ModalActions, ModalContent } from "./Modal";
 import Search from "./Search";
 
 interface Props {
-  onSave: (chords: ChordData) => void;
+  onAdd: (chord: ChordData) => void;
   onClose: () => void;
   open: boolean;
   chords: ChordData[];
@@ -16,7 +17,7 @@ export function getChordIdentifier(data: ChordData) {
   return `${data.name}-${t}`;
 }
 
-export default function ChordModal({ onSave, onClose, open, chords }: Props) {
+export default function ChordModal({ onAdd, onClose, open, chords }: Props) {
   const [searchString, setSearchString] = React.useState("");
   const [selected, setSelected] = React.useState([]);
 
@@ -62,6 +63,9 @@ export default function ChordModal({ onSave, onClose, open, chords }: Props) {
           {chordsComponents}
         </div>
       </ModalContent>
+      <ModalActions>
+        <Button onClick={() => {}}>Add</Button>
+      </ModalActions>
     </Modal>
   );
 }

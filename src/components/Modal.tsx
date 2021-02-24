@@ -17,6 +17,14 @@ export function ModalContent({ children }: ModalContentProps) {
   return <div className="p-4">{children}</div>;
 }
 
+interface ModalActionsProps {
+  children: React.ReactNode;
+}
+
+export function ModalActions({ children }: ModalActionsProps) {
+  return <div className="flex justify-end p-2">{children}</div>;
+}
+
 export function Modal({ title, children, open, onClose }: Props) {
   return (
     <div
