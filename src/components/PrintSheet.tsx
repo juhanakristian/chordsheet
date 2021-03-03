@@ -4,10 +4,12 @@ import { draw } from "vexchords";
 
 import { ChordData } from "./Chord";
 
-import { getChordIdentifier } from "../App";
-
 import "../index.css";
 
+export function getChordIdentifier(data: ChordData) {
+  const t = data.chord.join("").replace(/,/g, "");
+  return `${data.name}-${t}`;
+}
 interface SheetProps {
   chords: ChordData[];
 }

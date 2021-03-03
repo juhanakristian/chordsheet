@@ -1,4 +1,6 @@
 import { app, BrowserWindow, ipcMain } from "electron";
+import log from "electron-log";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
@@ -29,11 +31,22 @@ const createWindow = () => {
     width: 800,
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
     },
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  // mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  console.log(`${process.cwd()}/.webpack/renderer/main_window/index.html`);
+  // mainWindow.loadURL(
+  //   `file://${process.cwd()}/.webpack/renderer/main_window/index.html`
+  //   // {
+  //   //   baseURLForDataURL: `file://${process.cwd()}/.webpack/renderer`,
+  //   // }
+  // );
+  mainWindow.loadFile(
+    `${process.cwd()}/.webpack/renderer/main_window/index.html`
+  );
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
