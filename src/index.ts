@@ -36,17 +36,7 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  // mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
-  console.log(`${process.cwd()}/.webpack/renderer/main_window/index.html`);
-  // mainWindow.loadURL(
-  //   `file://${process.cwd()}/.webpack/renderer/main_window/index.html`
-  //   // {
-  //   //   baseURLForDataURL: `file://${process.cwd()}/.webpack/renderer`,
-  //   // }
-  // );
-  mainWindow.loadFile(
-    `${process.cwd()}/.webpack/renderer/main_window/index.html`
-  );
+  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();

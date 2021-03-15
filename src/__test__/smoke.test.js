@@ -3,14 +3,13 @@ import path from "path";
 
 import { setupBrowser } from "@testing-library/webdriverio";
 
+const packageName = process.env.npm_package_name;
 const app = new Application({
   path: path.join(
-    __dirname,
-    "..",
-    "..",
-    "out",
-    "chordsheet-darwin-x64/chordsheet.app/Contents/MacOS/chordsheet"
+    process.cwd(), // This works assuming you run npm test from project root
+    `out/${packageName}-darwin-x64/${packageName}.app/Contents/MacOS/${packageName}`
   ),
+  port: 9156,
 });
 
 describe("App", () => {

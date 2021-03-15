@@ -6,7 +6,7 @@ import { Modal, ModalActions, ModalContent } from "./Modal";
 import Search from "./Search";
 
 interface Props {
-  onAdd: (chord: ChordData) => void;
+  onAdd: (chord: ChordData[]) => void;
   onClose: () => void;
   open: boolean;
   chords: ChordData[];
@@ -19,11 +19,20 @@ export function getChordIdentifier(data: ChordData) {
 
 export default function ChordModal({ onAdd, onClose, open, chords }: Props) {
   const [searchString, setSearchString] = React.useState("");
-  const [selected, setSelected] = React.useState([]);
+  const [selected, setSelected] = React.useState<ChordData[]>([]);
 
-  function handleAddClicked(data: ChordData) {
-    const isSelected = selected.find((c: ChordData) => c.name === data.name);
-    if (isSelected) return;
+  function isSelected(chord: ChordData) {
+    return selected.find((c: ChordData) => c.name === chord.name) !== undefined;
+  }
+
+  function handleChordClick(data: ChordData) {
+    console.log(data);
+    console.log(selected);
+    if (isSelected(data)) {
+      const updated = selected.filter((c) => c.name !== data.name);
+      setSelected(updated);
+      return;
+    }
 
     setSelected([...selected, data]);
   }
@@ -45,7 +54,8 @@ export default function ChordModal({ onAdd, onClose, open, chords }: Props) {
         <Chord
           identifier={id}
           data={data}
-          onAdd={(data) => handleAddClicked(data)}
+          onClick={(data) => handleChordClick(data)}
+          highlight={isSelected(data)}
         />
       </div>
     );
@@ -64,7 +74,10 @@ export default function ChordModal({ onAdd, onClose, open, chords }: Props) {
         </div>
       </ModalContent>
       <ModalActions>
-        <Button onClick={() => {}}>Add</Button>
+        <div className="flex items-center">
+          <div>{selected.map((c) => c.name).join(", ")}</div>
+          <Button onClick={() => onAdd(selected)}>Add</Button>
+        </div>
       </ModalActions>
     </Modal>
   );

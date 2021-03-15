@@ -9,7 +9,8 @@ import "./index.css";
 import PrintSheet from "./components/PrintSheet";
 import SheetTitle from "./components/SheetTitle";
 import AddChord from "./components/AddChord";
-import ChordModal from "./components/ChordModal";
+import ChordModal, { getChordIdentifier } from "./components/ChordModal";
+import Chord, { ChordData } from "./components/Chord";
 
 function App() {
   const [chords, setChords] = React.useState([]);
@@ -18,6 +19,10 @@ function App() {
 
   function handlePrint() {
     window.print();
+  }
+
+  function handleAddChords(chords: ChordData[]) {
+    setSelected([...selected, ...chords]);
   }
 
   React.useEffect(() => {
@@ -34,13 +39,23 @@ function App() {
     };
   }, []);
 
+  const chordsComponents = selected.map((data: ChordData) => {
+    const id = getChordIdentifier(data);
+
+    return (
+      <div key={id} className="col-span-4 sm:col-span-2 lg:col-span-1">
+        <Chord identifier={id} data={data} />
+      </div>
+    );
+  });
+
   return (
     <>
       <PrintSheet chords={selected} />
       <ChordModal
         open={chordDialogOpen}
         onClose={() => setChordDialogOpen(false)}
-        onAdd={() => {}}
+        onAdd={handleAddChords}
         chords={chords}
       />
       <div className="flex flex-col w-full h-screen max-h-screen overflow-hidden no-print">
@@ -57,7 +72,7 @@ function App() {
             </div>
 
             <div className="grid grid-flow-row grid-cols-6 gap-4 p-5 debug">
-              {/* {chordsComponents} */}
+              {chordsComponents}
               <AddChord onClick={() => setChordDialogOpen(true)} />
             </div>
           </div>
