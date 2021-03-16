@@ -23,6 +23,7 @@ function App() {
 
   function handleAddChords(chords: ChordData[]) {
     setSelected([...selected, ...chords]);
+    setChordDialogOpen(false);
   }
 
   React.useEffect(() => {
@@ -58,7 +59,7 @@ function App() {
         onAdd={handleAddChords}
         chords={chords}
       />
-      <div className="flex flex-col w-full h-screen max-h-screen overflow-hidden no-print">
+      <div className="flex flex-col overflow no-print">
         <div className="flex flex-row w-full h-full">
           <div className="w-full overflow-auto overflow-x-hidden">
             <div className="flex justify-center pt-4">
@@ -73,7 +74,9 @@ function App() {
 
             <div className="grid grid-flow-row grid-cols-6 gap-4 p-5 debug">
               {chordsComponents}
-              <AddChord onClick={() => setChordDialogOpen(true)} />
+              <div className="col-span-4 sm:col-span-2 lg:col-span-1">
+                <AddChord onClick={() => setChordDialogOpen(true)} />
+              </div>
             </div>
           </div>
         </div>

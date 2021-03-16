@@ -6,6 +6,9 @@ module.exports = {
       square: [1, 1],
     },
     extend: {
+      boxShadow: {
+        button: "0 5px 0 rgba(1, 0, 0, 1)",
+      },
       // gridColumn: {
       //   "span-xs": ""
       // }
@@ -27,8 +30,12 @@ module.exports = {
     },
   },
   variants: {
-    backgroundColor: ["group-hover", "active", "hover"],
-    textColor: ["group-hover"],
+    extend: {
+      backgroundColor: ["group-hover", "active", "hover"],
+      textColor: ["group-hover"],
+      fontSize: ["hover", "active"],
+      padding: ["active"],
+    },
   },
   plugins: [require("tailwindcss-aspect-ratio")],
 };

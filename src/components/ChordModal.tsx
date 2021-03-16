@@ -21,13 +21,15 @@ export default function ChordModal({ onAdd, onClose, open, chords }: Props) {
   const [searchString, setSearchString] = React.useState("");
   const [selected, setSelected] = React.useState<ChordData[]>([]);
 
+  React.useEffect(() => {
+    if (!open) setSelected([]);
+  }, [open]);
+
   function isSelected(chord: ChordData) {
     return selected.find((c: ChordData) => c.name === chord.name) !== undefined;
   }
 
   function handleChordClick(data: ChordData) {
-    console.log(data);
-    console.log(selected);
     if (isSelected(data)) {
       const updated = selected.filter((c) => c.name !== data.name);
       setSelected(updated);
@@ -46,20 +48,23 @@ export default function ChordModal({ onAdd, onClose, open, chords }: Props) {
     return false;
   });
 
-  const chordsComponents = filteredChords.map((data: ChordData) => {
-    const id = getChordIdentifier(data);
+  const chordsComponents = open
+    ? filteredChords.map((data: ChordData) => {
+        const id = getChordIdentifier(data);
 
-    return (
-      <div key={id} className="col-span-4 sm:col-span-2 lg:col-span-1">
-        <Chord
-          identifier={id}
-          data={data}
-          onClick={(data) => handleChordClick(data)}
-          highlight={isSelected(data)}
-        />
-      </div>
-    );
-  });
+        return (
+          <div key={id} className="col-span-4 sm:col-span-2 lg:col-span-1">
+            <Chord
+              identifier={id}
+              data={data}
+              onClick={(data) => handleChordClick(data)}
+              highlight={isSelected(data)}
+            />
+          </div>
+        );
+      })
+    : null;
+
   return (
     <Modal title="Choose chords" open={open} onClose={onClose}>
       <ModalContent>

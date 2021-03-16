@@ -39,7 +39,7 @@ function Chord({ identifier, onClick, highlight, data }: ChordProps) {
         height: container.current.offsetWidth * (70 / 50),
       }
     );
-  }, [container, width, identifier, data]);
+  }, [container.current, width, identifier, data]);
 
   const borderColor = highlight ? "border-yellow-400" : "border-gray-200";
   const headerBgColor = highlight ? "bg-yellow-400" : "bg-gray-200";
@@ -50,19 +50,21 @@ function Chord({ identifier, onClick, highlight, data }: ChordProps) {
       onClick={() => onClick && onClick(data)}
     >
       <div
-        className={`flex flex-row pl-2 pr-2 ${headerBgColor} group-hover:bg-blue-400`}
+        className="relative flex items-center justify-center h-0"
+        style={{ paddingTop: "calc(297 / 210 * 100%)" }}
       >
-        <div role="heading" className="flex-grow group-hover:text-white">
-          {data.name}
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div
+            className={`flex flex-row pl-2 pr-2 ${headerBgColor} group-hover:bg-blue-400`}
+          >
+            <div role="heading" className="flex-grow group-hover:text-white">
+              {data.name}
+            </div>
+          </div>
+          <div>
+            <div className="m-auto" ref={container} id={identifier}></div>
+          </div>
         </div>
-      </div>
-      <div>
-        <div
-          className="m-auto"
-          style={{ maxWidth: 110 }}
-          ref={container}
-          id={identifier}
-        ></div>
       </div>
     </div>
   );

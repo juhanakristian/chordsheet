@@ -116,6 +116,7 @@
     "electron-chromedriver": "^11.0.0",
     "electron-log": "^4.3.2",
     "electron-squirrel-startup": "^1.0.0",
+    "framer-motion": "^3.10.5",
     "jest": "^26.4.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
