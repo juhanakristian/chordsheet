@@ -44,7 +44,7 @@ function App() {
     const id = getChordIdentifier(data);
 
     return (
-      <div key={id} className="col-span-4 sm:col-span-2 lg:col-span-1">
+      <div key={id} className="col-span-3 sm:col-span-2 lg:col-span-1">
         <Chord identifier={id} data={data} />
       </div>
     );
@@ -72,9 +72,9 @@ function App() {
               </IconButton>
             </div>
 
-            <div className="grid grid-flow-row grid-cols-6 gap-4 p-5 debug">
+            <div className="grid grid-flow-row grid-cols-9 gap-4 p-5 sm:grid-cols-8 debug">
               {chordsComponents}
-              <div className="col-span-4 sm:col-span-2 lg:col-span-1">
+              <div className="col-span-3 sm:col-span-2 lg:col-span-1">
                 <AddChord onClick={() => setChordDialogOpen(true)} />
               </div>
             </div>

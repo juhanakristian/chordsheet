@@ -53,7 +53,7 @@ export default function ChordModal({ onAdd, onClose, open, chords }: Props) {
         const id = getChordIdentifier(data);
 
         return (
-          <div key={id} className="col-span-4 sm:col-span-2 lg:col-span-1">
+          <div key={id} className="col-span-3 sm:col-span-2 lg:col-span-1">
             <Chord
               identifier={id}
               data={data}
@@ -74,7 +74,7 @@ export default function ChordModal({ onAdd, onClose, open, chords }: Props) {
             setSearchString(value);
           }}
         />
-        <div className="grid grid-flow-row grid-cols-6 gap-4 mt-4 debug">
+        <div className="grid grid-flow-row grid-cols-9 gap-4 mt-4 sm:grid-cols-8 debug">
           {chordsComponents}
         </div>
       </ModalContent>

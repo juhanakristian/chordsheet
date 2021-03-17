@@ -16,7 +16,14 @@ interface ModalContentProps {
 }
 
 export function ModalContent({ children }: ModalContentProps) {
-  return <div className="p-4">{children}</div>;
+  return (
+    <div
+      className="p-4 overflow-auto"
+      style={{ maxHeight: "calc(100vh - 300px)" }}
+    >
+      {children}
+    </div>
+  );
 }
 
 interface ModalActionsProps {
