@@ -1,4 +1,6 @@
 import { app, BrowserWindow, ipcMain } from "electron";
+import log from "electron-log";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
@@ -29,6 +31,7 @@ const createWindow = () => {
     width: 800,
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
     },
   });
 

@@ -2,7 +2,8 @@
   "env": {
     "browser": true,
     "es6": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "extends": [
     "eslint:recommended",
@@ -12,7 +13,7 @@
     "plugin:import/errors",
     "plugin:import/warnings"
   ],
-  "plugins": ["react-hooks"],
+  "plugins": ["react-hooks", "react"],
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "off",
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
