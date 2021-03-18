@@ -15,6 +15,7 @@ import Chord, { ChordData } from "./components/Chord";
 function App() {
   const [chords, setChords] = React.useState([]);
   const [selected, setSelected] = React.useState([]);
+  const [title, setTitle] = React.useState("");
   const [chordDialogOpen, setChordDialogOpen] = React.useState(false);
 
   function handlePrint() {
@@ -52,7 +53,7 @@ function App() {
 
   return (
     <>
-      <PrintSheet chords={selected} />
+      <PrintSheet chords={selected} title={title} />
       <ChordModal
         open={chordDialogOpen}
         onClose={() => setChordDialogOpen(false)}
@@ -63,7 +64,10 @@ function App() {
         <div className="flex flex-row w-full h-full">
           <div className="w-full overflow-auto overflow-x-hidden">
             <div className="flex justify-center pt-4">
-              <SheetTitle />
+              <SheetTitle
+                title={title}
+                onChange={(e) => setTitle(e.currentTarget.value)}
+              />
             </div>
             <div className="flex justify-between pt-5 pl-5 pr-10 no-print">
               <h2 className="text-2xl">Chords</h2>

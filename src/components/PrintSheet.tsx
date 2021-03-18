@@ -10,13 +10,14 @@ export function getChordIdentifier(data: ChordData) {
   const t = data.chord.join("").replace(/,/g, "");
   return `${data.name}-${t}`;
 }
-interface SheetProps {
+interface Props {
+  title: string;
   chords: ChordData[];
 }
 
-function PrintSheet(props: SheetProps) {
+function PrintSheet({ chords, title }: Props) {
   React.useLayoutEffect(() => {
-    for (const c of props.chords) {
+    for (const c of chords) {
       const id = getChordIdentifier(c);
       const selector = `#printsheet_${id}`;
       // Clear the container
@@ -33,9 +34,9 @@ function PrintSheet(props: SheetProps) {
         }
       );
     }
-  }, [props.chords]);
+  }, [chords]);
 
-  const chords = props.chords.map((c: ChordData) => {
+  const chordsComponents = chords.map((c: ChordData) => {
     const id = getChordIdentifier(c);
     return (
       <div key={id}>
@@ -52,7 +53,12 @@ function PrintSheet(props: SheetProps) {
 
   return (
     <div className="relative p-2 bg-white border border-solid shadow-xl aspect-ratio-a4 print">
-      <div className="absolute flex flex-wrap min-w-full">{chords}</div>
+      <div className="text-3xl text-center border-none outline-none">
+        {title}
+      </div>
+      <div className="absolute flex flex-wrap min-w-full">
+        {chordsComponents}
+      </div>
     </div>
   );
 }
