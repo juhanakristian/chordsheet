@@ -1,5 +1,7 @@
 module.exports = {
-  purge: [],
+  mode: "jit",
+  purge: ["./src/**/*.{js,jsx,ts,tsx}"],
+
   theme: {
     aspectRatio: {
       a4: [210, 297],
@@ -29,13 +31,13 @@ module.exports = {
       "7xl": "5rem",
     },
   },
-  variants: {
-    extend: {
-      backgroundColor: ["group-hover", "active", "hover"],
-      textColor: ["group-hover"],
-      fontSize: ["hover", "active"],
-      padding: ["active"],
-    },
-  },
+  // variants: {
+  //   extend: {
+  //     backgroundColor: ["group-hover", "active", "hover"],
+  //     textColor: ["group-hover"],
+  //     fontSize: ["hover", "active"],
+  //     padding: ["active"],
+  //   },
+  // },
   plugins: [require("tailwindcss-aspect-ratio")],
 };
