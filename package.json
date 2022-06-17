@@ -92,7 +92,7 @@
     "autoprefixer": "^10.0.2",
     "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^3.0.0",
-    "electron": "^11.3.0",
+    "electron": "^15.5.5",
     "electron-mock-ipc": "^0.3.7",
     "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.0",
